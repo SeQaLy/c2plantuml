@@ -1,0 +1,17 @@
+@startuml
+title retry_connect
+start
+:int attempt = 0;
+:retry:;
+:attempt++;
+if (!connect_once()?) then (yes)
+  if (attempt < tries?) then (yes)
+    :goto retry;
+    detach
+  endif
+  :return -1;
+  stop
+endif
+:return attempt;
+stop
+@enduml

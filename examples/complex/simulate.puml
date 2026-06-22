@@ -1,0 +1,50 @@
+@startuml
+title simulate
+start
+:int state = seed;
+:int total = 0;
+:int phase = 0;
+while (steps-- > 0?) is (yes)
+  switch (phase?)
+  case (0)
+    :int i = 0;
+    while (i < 4?) is (yes)
+      :int j = 0;
+      while (j < 4?) is (yes)
+        if ((state ^ i) & j?) then (yes)
+          :total += i * j;
+        elseif (state > 1000?) then (yes)
+          :phase = 2;
+          :goto next;
+          detach
+        else (no)
+          :total -= 1;
+        endif
+        :j++;
+      endwhile (no)
+      :i++;
+    endwhile (no)
+    :phase = 1;
+  case (1)
+    repeat
+      :state = state * 3 + 1;
+      if (state % 2 == 0?) then (yes)
+        :state /= 2;
+      elseif (state % 5 == 0?) then (yes)
+        :continue;
+      endif
+      :total += state & 0xFF;
+    repeat while (state < 5000?) is (yes)
+    :phase = 0;
+  case (default)
+    :total = -1;
+    :goto end;
+    detach
+  endswitch
+  :next:;
+  :state += phase;
+endwhile (no)
+:end:;
+:return total;
+stop
+@enduml

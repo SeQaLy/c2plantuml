@@ -1,0 +1,13 @@
+@startuml
+title countdown
+start
+while (n > 0?) is (yes)
+  :printf("%d\\n", n);
+  :n--;
+endwhile (no)
+repeat
+  :printf("again\\n");
+  :n++;
+repeat while (n < 3?) is (yes)
+stop
+@enduml

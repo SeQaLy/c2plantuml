@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# GUI 設定 (ユーザーのホームに保存されるが念のため)
+.c2plantuml_gui.json

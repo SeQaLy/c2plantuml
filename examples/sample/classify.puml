@@ -1,0 +1,14 @@
+@startuml
+title classify
+start
+if (x < 0?) then (yes)
+  :return -1;
+  stop
+elseif (x == 0?) then (yes)
+  :return 0;
+  stop
+else (no)
+  :return 1;
+  stop
+endif
+@enduml

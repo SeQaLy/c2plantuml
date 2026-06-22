@@ -1,0 +1,25 @@
+@startuml
+title scan
+start
+:int sum = 0;
+:int i = 0;
+while (i < n?) is (yes)
+  if (a[i] < 0?) then (yes)
+    :continue;
+  endif
+  switch (a[i] % 3?)
+  case (0)
+    :sum += 1;
+  case (1, 2)
+    :sum += 2;
+  case (default)
+    :sum += 0;
+  endswitch
+  if (sum > MAX?) then (yes)
+    break
+  endif
+  :i++;
+endwhile (no)
+:return sum;
+stop
+@enduml

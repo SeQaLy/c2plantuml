@@ -1,0 +1,45 @@
+@startuml
+title deep_search
+start
+:int found = 0;
+:int checked = 0;
+:int a = 0;
+while (a < N?) is (yes)
+  :int b = 0;
+  while (b < N?) is (yes)
+    :int c = 0;
+    while (c < N?) is (yes)
+      :int d = 0;
+      while (d < N?) is (yes)
+        :int e = 0;
+        while (e < N?) is (yes)
+          :int v = grid[a][b][c][d][e];
+          :checked++;
+          if (v < 0?) then (yes)
+            :continue;
+          elseif (v == target?) then (yes)
+            :found++;
+            if (found >= 3?) then (yes)
+              :goto done;
+              detach
+            endif
+          elseif (v > target * 2?) then (yes)
+            break
+          else (no)
+            :found += 0;
+          endif
+          :e++;
+        endwhile (no)
+        :d++;
+      endwhile (no)
+      :c++;
+    endwhile (no)
+    :b++;
+  endwhile (no)
+  :a++;
+endwhile (no)
+:done:;
+:printf("checked=%d\\n", checked);
+:return found;
+stop
+@enduml

@@ -1,0 +1,54 @@
+@startuml
+title classify_token
+start
+if (s == NULL || len <= 0?) then (yes)
+  :return -1;
+  stop
+endif
+:int score = 0;
+switch (mode?)
+case (0)
+  :score = len;
+case (1)
+  :score = len * 2;
+case (2, 3)
+  :score = len * 3;
+case (default)
+  :score = 0;
+endswitch
+:int i = 0;
+while (i < len?) is (yes)
+  :char ch = s[i];
+  if (ch >= '0' && ch <= '9'?) then (yes)
+    :score += 1;
+  elseif (ch >= 'a' && ch <= 'z'?) then (yes)
+    :score += 2;
+  elseif (ch >= 'A' && ch <= 'Z'?) then (yes)
+    :score += 3;
+  elseif (ch == '_'?) then (yes)
+    :score += 4;
+  elseif (ch == ' ' || ch == '\t'?) then (yes)
+    :continue;
+  else (no)
+    :score -= 1;
+  endif
+  if (score > 100?) then (yes)
+    :score = 100;
+    break
+  endif
+  :i++;
+endwhile (no)
+if (score < 0?) then (yes)
+  :return 0;
+  stop
+elseif (score < 10?) then (yes)
+  :return 1;
+  stop
+elseif (score < 50?) then (yes)
+  :return 2;
+  stop
+else (no)
+  :return 3;
+  stop
+endif
+@enduml
